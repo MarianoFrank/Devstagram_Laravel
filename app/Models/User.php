@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -20,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "username"
     ];
 
     /**
@@ -43,5 +47,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    //convierte username en un slug
+    protected function username(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Str::slug($value),
+        );
     }
 }

@@ -22,12 +22,13 @@
 <body class=" text-slate-900 font-semibold text-md min-h-screen flex flex-col">
     @include('components.header')
 
+    <main class="text-sm flex-grow @if (!isset($container) || $container) w-[90%] max-w-screen-lg mx-auto @endif">
+        <h1 class="text-bold text-3xl mb-5">
+            @yield('titulo')
+        </h1>
 
-    <main class=" mx-auto max-w-screen-xl w-[90%] flex-grow">
         @yield('content')
     </main>
-
-
 
     @include('components.footer')
 
