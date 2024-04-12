@@ -23,9 +23,9 @@
     @include('components.header')
 
     <main class="text-sm flex-grow @if (!isset($container) || $container) w-[90%] max-w-screen-lg mx-auto @endif">
-        <h1 class="text-bold text-3xl mb-5">
-            @yield('titulo')
-        </h1>
+
+        @yield('titulo')
+
 
         @yield('content')
     </main>
