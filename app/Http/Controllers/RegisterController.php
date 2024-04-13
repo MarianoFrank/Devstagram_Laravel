@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'username' => [
                 "bail", "required", "min:5", "max:20", new Username
             ],
-            'email' => 'bail|required|email|max:255|unique:users',
+            'email' => 'bail|required|email|max:64|unique:users',
             'password' => 'bail|required|min:6|confirmed',
         ]);
 
@@ -46,6 +46,6 @@ class RegisterController extends Controller
             $request->session()->regenerate();
         }
 
-        return redirect()->intended('muro');
+        return redirect()->intended(Auth::user()->username);
     }
 }

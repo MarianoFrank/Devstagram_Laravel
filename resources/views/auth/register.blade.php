@@ -16,43 +16,33 @@
                     <div>
                         <label for="nombre">Nombre</label>
                         <x-input-text name="nombre" placeholder="Tu nombre" />
-                        @error('nombre')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                      
                     </div>
 
                     <div>
                         <label for="username">UserName</label>
                         <x-input-text name="username" placeholder="Nombre de usuario" />
-                        @error('username')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                        
                     </div>
 
                     <div>
                         <label for="email">Email</label>
                         <x-input-text name="email" placeholder="Tu email" type="email" />
-                        @error('email')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                       
                     </div>
 
                     <div>
 
                         <label for="password">Password</label>
                         <x-input-text name="password" type="password" />
-                        @error('password')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                        
 
                     </div>
 
                     <div>
                         <label for="password_confirmation">Repite Password</label>
                         <x-input-text name="password_confirmation" type="password" :old=false />
-                        @error('password_confirmation')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                     
                     </div>
 
                     <div>

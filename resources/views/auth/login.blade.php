@@ -17,9 +17,7 @@
                     <div>
                         <label for="email">Email</label>
                         <x-input-text name="email" placeholder="Tu email" type="email" />
-                        @error('email')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                      
 
                     </div>
 
@@ -34,9 +32,12 @@
                             </div>
                         </div>
                         <x-input-text name="password" placeholder="Tu password" type="password" />
-                        @error('password')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
+                       
+                    </div>
+
+                    <div class="mb-5 flex items-center gap-2">
+                        <input type="checkbox" name="remember" id="remember" class="cursor-pointer">
+                        <label for="remember" class="cursor-pointer"> Mantener sesión abierta</label>
                     </div>
 
                     <div>

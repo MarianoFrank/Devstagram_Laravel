@@ -56,4 +56,12 @@ class User extends Authenticatable
             set: fn ($value) => Str::slug($value),
         );
     }
+
+    //utiliza siempre una columna de base de datos que no sea 
+    //id cuando se recupera una clase de modelo determinada
+    //en el enrutador, ej: /{user}, utilizará "username"
+    public function getRouteKeyName(): string
+    {
+        return 'username';
+    }
 }
