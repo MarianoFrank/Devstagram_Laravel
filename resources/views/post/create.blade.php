@@ -11,10 +11,9 @@
         <x-drag-and-drop/>
 
         <div>
-            <label for="descripcion">Descripcion</label>
+            <label for="descripcion">Descripcion (requerida)</label>
             <x-text-area name="descripcion" placeholder="Descripcion aqui..." id="descripcion" />
-          
-
+        
         </div>
 
         <x-button type="submit" value="Publicar" />
