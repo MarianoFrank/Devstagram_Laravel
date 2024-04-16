@@ -14,9 +14,7 @@ class ImagePostController extends Controller
     public static function store(Request $request)
     {
 
-        if (!$request->hasFile('file')) {
-            return response()->status(404);
-        }
+        
 
         $path_upload = public_path("uploads")  . "/tmp";
 
