@@ -22,7 +22,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('post.create');
     }
@@ -30,47 +30,22 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "descripcion" => "required",
+            "descripcion" => "required|max:255",
             "imagenes" => "required",
         ]);
 
+        //array con nombres de las imagenes del post
+        $arrayImagenes = json_decode($request->input("imagenes"));
 
-        $names =  self::gestionarImagenes($request->file("imagenes"));
+        foreach ($arrayImagenes as $nombreImagen) {
+            $rutaOrigen = public_path('uploads/tmp/' . $nombreImagen);
+            $rutaDestino = public_path('uploads/' . $nombreImagen);
 
-        dd($names);
-
-        // $post = new Post();
-        // $post->title = $request->title;
-        // $post->body = $request->body;
-        // $post->user_id = $request->user()->id;
-        // $post->save();
-
-        // return redirect()->route('dashboard');
-    }
-
-    //retorna los nombres de las imagenes guardadas
-    private static function gestionarImagenes($imagenes)
-    {
-
-        $upload_path = public_path("uploads");
-
-        if (!File::exists($upload_path)) {
-            File::makeDirectory($upload_path, $mode = 0777, true, true);
+            if (File::exists($rutaOrigen)) {
+                File::move($rutaOrigen, $rutaDestino);
+            }
         }
 
-        $manager = new ImageManager(new Driver()); //gd driver
-        $names = [];
-
-        foreach ($imagenes as $imagenTmp) {
-            $imagen = $manager->read($imagenTmp);
-
-            $name = Str::uuid() . "-" . Date::now()->format("Y-m-d") . ".jpg";
-
-            array_push($names, $name);
-
-            $imagen->cover(1024, 1024)->toJpeg(90)->save($upload_path  . "/" . $name);
-        }
-
-        return $names;
+        
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImagePostController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,4 +26,7 @@ Route::middleware("auth")->group(function () {
     Route::get("/{user}", [PostController::class, "index"])->name("post.index");
     Route::get("/post/create", [PostController::class, "create"])->name("post.create");
     Route::post("/post/create", [PostController::class, "store"])->name("post.store");
+
+    //imagenes post
+    Route::post("/api/post/imagen/upload", [ImagePostController::class, "store"]);
 });

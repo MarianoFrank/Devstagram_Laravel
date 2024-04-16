@@ -12,6 +12,7 @@
 
     <div class="previews-container">
         {{-- Aqui van las vistas previas --}}
+  
 
     </div>
 
@@ -20,9 +21,11 @@
 @error('imagenes')
     <label class="text-red-600 mt-0">{{ $message }}</label>
 @enderror
-{{-- Input donde se inyectan las imagenes --}}
+{{-- Input donde se inyectan las imagenes (files)--}}
 <input type="file" name="imagenes[]" id="imagenes" accept="image/*" multiple style="display: none" />
 
+{{-- Este se llena con las imagenes que tiene el post (sirve al momento de editar) --}}
+<input type="hidden" name="imagenesServer" id="imagenesServer" >
 
 @push('scripts')
     <script>
@@ -167,11 +170,12 @@
             transform: translate(-50%, -50%);
             z-index: 1;
             display: flex;
-            flex-direction: column;align-items: center;
+            flex-direction: column;
+            align-items: center;
             gap: 2rem;
         }
 
-        .default-text  svg{
+        .default-text svg {
             height: 2.4rem;
             width: 2.4rem;
         }
@@ -221,7 +225,7 @@
             padding: 2rem;
         }
 
-        .remove-imagen svg{
+        .remove-imagen svg {
             width: 1.2rem;
             height: 1.2rem;
         }

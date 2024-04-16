@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Faker\Generator as FakerGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,17 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+
+        $imagenes = [];
+        for ($i = 1; $i <= mt_rand(2, 9); $i++) {
+            array_push($imagenes, $this->faker->imagePicsum(public_path("uploads"), 800, 800));
+        }
+
         return [
-            //
+            "title" => $this->faker->sentence(),
+            "description" => $this->faker->paragraph(3, true),
+            "image" => json_encode($imagenes),
+            "user_id" => $this->faker->randomElement(['1', '2', '3']),
         ];
     }
 }

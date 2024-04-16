@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string("title");
+            $table->text("description");
+            $table->string("image");
             $table->timestamps();
+            /*el constrained sigue las convenciones segun el nombre de la FK,
+            no hace falta definir a que columna hace referencia ni a que tabla*/
+            $table->foreignId("user_id")->constrained()->onDelete("cascade");
         });
     }
 
