@@ -1,20 +1,31 @@
 <?php
 
-use App\Http\Controllers\CommentController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ImagePostController;
 
 
-Route::get('/', function () {
+use App\Models\Post;
+use App\Models\Comment;
 
+Route::get('/factory', function () {
+    $post = Post::factory(["user_id" => "2"])
+        ->has(Comment::factory()->count(3), "comments")
+        ->create();
 
-    return view('home');
+   $post->dump();
+   $post->comments->dump();
 });
 
+
+Route::get('/', function () {
+    return view('home');
+});
 
 Route::get('/login', [LoginController::class, "index"])->name("login");
 Route::post('/login', [LoginController::class, "store"]);

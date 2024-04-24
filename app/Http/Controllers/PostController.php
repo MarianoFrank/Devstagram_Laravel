@@ -70,6 +70,19 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        dd(Gate::allows("delete", $post));
+        Gate::authorize("delete", $post);
+
+        foreach (json_decode($post->image) as $image) {
+
+            $rutaImagen = public_path('/uploads/' . $image);
+
+            if (file_exists($rutaImagen)) {
+                unlink($rutaImagen);
+            }
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index', Auth::user()->username);
     }
 }

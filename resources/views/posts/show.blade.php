@@ -20,7 +20,13 @@
                 </div>
                 <div class="swiper-button-next"></div>
             </div>
-            <p class="py-3">0 Likes</p>
+
+            <div class="flex gap-1 items-center">
+                <x-like-button />
+                <p class="py-3" id="likeAccount">0</p>
+            </div>
+
+
             <div class="flex py-2 gap-2">
                 <a class="font-bold"
                     href="{{ route('posts.index', $post->user->username) }}">{{ $post->user->username }}</a>
@@ -32,11 +38,11 @@
             @auth
                 @if ($post->user_id === auth()->user()->id)
                     <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
-                        @method("DELETE")
+                        @method('DELETE')
                         @csrf
                         <button type="submit"
-                            class="text-red-500 font-bold pt-5 flex items-center gap-1 justify-center">Eliminar publicacion<i
-                                class="bi bi-trash-fill"></i></button>
+                            class="text-red-500 font-bold pt-5 flex items-center gap-1 justify-center">Eliminar
+                            publicacion<i class="bi bi-trash-fill"></i></button>
                     </form>
                 @endif
             @endauth
