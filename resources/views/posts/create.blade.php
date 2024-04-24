@@ -9,10 +9,11 @@
 @endpush
 
 @section('content')
-    <form action="/api/post/imagen/upload" class="dropzone">
-        @csrf</form>
+    <form action="/post/imagen-tmp" class="dropzone">
+        @csrf
+    </form>
 
-    <form class="space-y-6" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="space-y-6" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div>
@@ -27,3 +28,7 @@
 
     </form>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/dropzonePost.js')
+@endpush

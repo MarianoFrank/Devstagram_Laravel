@@ -23,7 +23,7 @@
 
 <body class=" text-slate-900 font-semibold text-md min-h-screen flex flex-col">
     @session('alert')
-    <div class="p-2 fixed rounded top-20 left-1/2 -translate-x-1/2 text-bold text-zinc-50
+    <div class="p-2 fixed rounded top-20 left-1/2 -translate-x-1/2 text-bold text-zinc-50 z-[10000]
     @if ($value["type"]==="error")
         bg-red-600
     @elseif ($value["type"]==="success")

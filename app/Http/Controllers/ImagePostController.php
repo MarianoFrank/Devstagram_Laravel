@@ -13,9 +13,6 @@ class ImagePostController extends Controller
 {
     public static function store(Request $request)
     {
-
-        
-
         $path_upload = public_path("uploads")  . "/tmp";
 
         if (!File::exists($path_upload)) {
@@ -31,5 +28,17 @@ class ImagePostController extends Controller
         $imagen->cover(1024, 1024)->toJpeg(90)->save($path_upload  . "/" . $name);
 
         return response()->json($name);
+    }
+
+
+    public static function destroy($imagen)
+    {
+        $rutaImagen = public_path('/uploads/tmp/' . $imagen);
+
+        if (file_exists($rutaImagen)) {
+            unlink($rutaImagen);
+        }
+        
+        return response()->json([], 200);
     }
 }

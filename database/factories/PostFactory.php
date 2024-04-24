@@ -24,10 +24,10 @@ class PostFactory extends Factory
         }
 
         return [
-            "title" => $this->faker->sentence(),
             "description" => $this->faker->paragraph(3, true),
             "image" => json_encode($imagenes),
-            "user_id" => $this->faker->randomElement(['1', '2', '3']),
+            "user_id" => $this->faker->randomElement(['1',"3"]),
+            
         ];
     }
 }

@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\File;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
 
     public function index(User $user)
     {
+        $posts = Post::where("user_id", $user->id)->paginate(20);
 
         return view('dashboard', [
-            "user" => $user
+            "user" => $user,
+            "posts" => $posts
         ]);
     }
 
     public function create()
     {
-        return view('post.create');
+        return view('posts.create');
     }
 
     public function store(Request $request)
@@ -35,8 +36,9 @@ class PostController extends Controller
         ]);
 
         //array con nombres de las imagenes del post
-        $arrayImagenes = json_decode($request->input("imagenes"));
+        $arrayImagenes = json_decode($request->imagenes);
 
+        //en este punto las imagenes son validas, mueve las imagenes de tmp a uuploads
         foreach ($arrayImagenes as $nombreImagen) {
             $rutaOrigen = public_path('uploads/tmp/' . $nombreImagen);
             $rutaDestino = public_path('uploads/' . $nombreImagen);
@@ -46,6 +48,28 @@ class PostController extends Controller
             }
         }
 
-        
+        //crear post
+        Post::create([
+            "description" => $request->descripcion,
+            "image" => $arrayImagenes,
+            "user_id" => Auth::user()->id,
+        ]);
+
+
+        return redirect()->route('posts.index', Auth::user()->username);
+    }
+
+    public function show(User $user, Post $post)
+    {
+
+        return view("posts.show", [
+            "user" => $user,
+            "post" => $post
+        ]);
+    }
+
+    public function destroy(Post $post)
+    {
+        dd(Gate::allows("delete", $post));
     }
 }

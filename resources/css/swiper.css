@@ -1,0 +1,38 @@
+.swiper{
+    margin: 0 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #000000cd !important;
+    /* Color de los botones */
+    background-color: #ffffff90;
+    /* Color de fondo de los botones */
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+    border-radius: 100%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: .7rem !important;
+}
+
+/* Estilos para la paginación, si es necesario */
+
+
+.swiper-pagination-bullet {
+    background-color: #ffffffaf !important;
+    /* Color de los puntos de paginación */
+    opacity: 1 ;
+
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ffffff !important;
+    /* Color de los puntos de paginación */
+    
+}

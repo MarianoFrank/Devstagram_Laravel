@@ -39,6 +39,6 @@ class LoginController extends Controller
         }
         $request->session()->regenerate();
 
-        return redirect()->route("post.index",Auth::user()->username);
+        return redirect()->route("posts.index",Auth::user()->username);
     }
 }

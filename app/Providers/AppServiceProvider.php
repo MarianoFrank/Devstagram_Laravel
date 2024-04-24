@@ -5,6 +5,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot()
   {
-    //
+    Model::preventLazyLoading(true); //previene el uso de la carga diferida
   }
 }
