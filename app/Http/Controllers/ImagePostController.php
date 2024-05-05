@@ -7,38 +7,39 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
+
+//Este controlador guarda las imagenes en una carpeta temporal, trabaja en conjunto con dropzone
 
 class ImagePostController extends Controller
 {
     public static function store(Request $request)
     {
-        $path_upload = public_path("uploads")  . "/tmp";
-
-        if (!File::exists($path_upload)) {
-            File::makeDirectory($path_upload, 0777, true, true);
-        }
-
-        $manager = new ImageManager(new Driver()); //gd driver
-
-        $imagen = $manager->read($request->file("file"));
-
-        $name = Str::uuid() . "-" . Date::now()->format("Y-m-d") . ".jpg";
-
-        $imagen->cover(1024, 1024)->toJpeg(90)->save($path_upload  . "/" . $name);
+        $name = self::procesarImagen($request->file("file"));
 
         return response()->json($name);
     }
 
 
+    private static function procesarImagen($file)
+    {
+        $manager = new ImageManager(new Driver()); //gd driver
+        $imagen = $manager->read($file);
+        $name = Str::uuid() . "-" . Date::now()->format("Y-m-d") . ".jpg";
+        $imagenJpg = $imagen->cover(1024, 1024)->toJpeg(90);
+
+        //guardar
+        Storage::disk('public')->put("/tmp/" . $name, $imagenJpg);
+
+        return $name;
+    }
+
+
     public static function destroy($imagen)
     {
-        $rutaImagen = public_path('/uploads/tmp/' . $imagen);
+        Storage::disk('public')->delete("/tmp/" . $imagen);
 
-        if (file_exists($rutaImagen)) {
-            unlink($rutaImagen);
-        }
-        
         return response()->json([], 200);
     }
 }

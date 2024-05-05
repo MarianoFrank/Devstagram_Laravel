@@ -20,7 +20,7 @@ class PostFactory extends Factory
 
         $imagenes = [];
         for ($i = 1; $i <= mt_rand(2, 9); $i++) {
-            array_push($imagenes, $this->faker->imagePicsum(public_path("uploads"), 1000, 1000));
+            array_push($imagenes, $this->faker->imagePicsum(public_path("storage"), 1000, 1000));
         }
 
         return [

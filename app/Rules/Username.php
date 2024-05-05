@@ -19,8 +19,11 @@ class Username implements ValidationRule
     {
         // Verifica si username convertido a slug ya existe
         $slug = Str::slug($value);
+        if ($slug === auth()->user()->username) {
+            return;
+        }
         if (User::where('username', $slug)->exists()) {
-            $fail(Lang::get('validation.unique', ['attribute' => $attribute]));
+            $fail('validation.unique')->translate();
         }
     }
 }

@@ -68,7 +68,7 @@ return [
         'numeric' => 'El campo :attribute debe ser mayor o igual que :value.',
         'string' => 'El campo :attribute debe ser mayor o igual a :value caracteres.',
     ],
-    'image' => 'El campo :attribute debe ser una imagen.',
+    'image' => 'El campo debe ser una imagen.',
     'in' => 'El campo :attribute seleccionado no es válido.',
     'in_array' => 'El campo :attribute no existe en :other.',
     'integer' => 'El campo :attribute debe ser un entero.',
@@ -97,7 +97,7 @@ return [
         'string' => 'El campo :attribute debe ser menor que :max caracteres.',
     ],
     'max_digits' => 'El campo :attribute no debe de tener mas de :max dígitos.',
-    'mimes' => 'El campo :attribute debe ser un archivo de tipo: :values.',
+    'mimes' => 'Debe ser un archivo de tipo: :values.',
     'mimetypes' => 'El campo :attribute debe ser un archivo de tipo: :values.',
     'min' => [
         'array' => 'El campo :attribute debe tener al menos :min elementos.',
@@ -128,7 +128,7 @@ return [
     'prohibited_unless' => 'El campo :attribute no está permitido si :other no está en :values.',
     'prohibits' => 'El campo :attribute no permite que :other esté presente.',
     'regex' => 'El formato del campo :attribute no es válido.',
-    'required' => 'El campo :attribute es requerido.',
+    'required' => 'Este campo es requerido.',
     'required_array_keys' => 'El campo :attribute debe contener entradas para: :values.',
     'required_if' => 'El campo :attribute es requerido cuando el campo :other es :value.',
     'required_unless' => 'El campo :attribute es requerido a menos que :other esté presente en :values.',
@@ -162,7 +162,7 @@ return [
     | especifique una línea de idioma personalizada específica para una regla de atributo dada.
     |
     */
-
+    "change_saved" => "Cambios guardados correctamente",
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

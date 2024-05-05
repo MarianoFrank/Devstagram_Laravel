@@ -19,7 +19,7 @@ class CommentFactory extends Factory
 
         return [
             "content" => $this->faker->paragraph(2, true),
-            "user_id" => $this->faker->randomElement(['1', "2", "3"]),
+            "user_id" => $this->faker->randomElement(['1', "2"]),
             "post_id" => "1",
         ];
     }

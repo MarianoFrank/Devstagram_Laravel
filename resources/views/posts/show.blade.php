@@ -3,6 +3,7 @@
 
 @push('styles')
     @vite('resources/css/swiper.css')
+    @vite('resources/css/like-button.css')
 @endpush
 
 @section('content')
@@ -12,7 +13,7 @@
             <div class="w-fit h-fit swiper">
                 <div class="swiper-wrapper ">
                     @foreach (json_decode($post->image) as $imagen)
-                        <img class="swiper-slide " src="{{ asset('uploads') . '/' . $imagen }}">
+                        <img class="swiper-slide " src="{{ asset('storage') . '/' . $imagen }}">
                     @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
@@ -22,8 +23,30 @@
             </div>
 
             <div class="flex gap-1 items-center">
-                <x-like-button />
-                <p class="py-3" id="likeAccount">0</p>
+                @auth
+                    <div class="middle-wrapper">
+                        <div class="like-wrapper">
+                            <a class="like-button @if ($post->likes->contains('user_id', auth()->user()->id)) liked @endif">
+                                <span class="like-icon">
+                                    <div class="heart-animation-1"></div>
+                                    <div class="heart-animation-2"></div>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                @endauth
+                @guest
+                    <div class="middle-wrapper">
+                        <div class="like-wrapper">
+                            <a class="like-button" data-guest="true">
+                                <span class="like-icon">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                @endguest
+
+                <p class="py-3" id="likeAccount">{{ $post->likes_count }}</p>
             </div>
 
 
@@ -102,4 +125,6 @@
 
 @push('scripts')
     @vite('resources/js/swiperPost.js')
+
+    @vite('resources/js/like-button.js')
 @endpush
