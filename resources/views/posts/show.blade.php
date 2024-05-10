@@ -10,7 +10,7 @@
     <div class="mx-auto container-xl md:flex gap-5 py-10">
 
         <div class="md:w-2/3">
-            <div class="w-fit h-fit swiper">
+            <div class="w-fit h-fit swiper rounded-md">
                 <div class="swiper-wrapper ">
                     @foreach (json_decode($post->image) as $imagen)
                         <img class="swiper-slide " src="{{ asset('storage') . '/' . $imagen }}">
@@ -117,6 +117,9 @@
 
             @endauth
 
+            @guest
+                <p class="mt-3"> <a class="text-blue-500" href="{{ route('login') }}">Inicia sesion </a>para comentar, o <a class="text-blue-500" href="{{route("register")}}">registrate</a>.</p>
+            @endguest
         </div>
     </div>
 @endsection
