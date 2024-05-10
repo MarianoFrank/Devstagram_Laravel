@@ -39,7 +39,7 @@ class PostController extends Controller
 
         try {
             $imagenesJSON = self::confirmarImagenes($request->imagenes);
-           
+
             //crear post
             Post::create([
                 "description" => $request->descripcion,
@@ -84,12 +84,7 @@ class PostController extends Controller
         Gate::authorize("delete", $post);
 
         foreach (json_decode($post->image) as $image) {
-
-            $rutaImagen = public_path('/uploads/' . $image);
-
-            if (file_exists($rutaImagen)) {
-                unlink($rutaImagen);
-            }
+            Storage::disk('public')->delete($image);
         }
 
         $post->delete();
