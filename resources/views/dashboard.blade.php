@@ -7,8 +7,8 @@
 @section('content')
     <div class="flex justify-center">
         <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col md:flex-row gap-5">
-            @if (isset(auth()->user()->image))
-                <img src="{{ asset('storage') . '/' . auth()->user()->image }}" class="md:w-8/12 lg:w-6/12 rounded-full">
+            @if (!empty($user->image))
+                <img src="{{ asset('storage') . '/' . $user->image }}" class="md:w-8/12 lg:w-6/12 rounded-full">
             @else
                 <div class="md:w-8/12 lg:w-6/12 ">
                     <img src="{{ asset('img/usuario.svg') }}">
@@ -28,10 +28,25 @@
 
 
                 <div class="flex flex-col mt-2">
-                    <p class="font-bold">0 <span class="font-normal">Seguidores</span></p>
-                    <p class="font-bold">0 <span class="font-normal">Siguiendo</span></p>
-                    <p class="font-bold">0 <span class="font-normal">Post</span></p>
+                    <div class="flex gap-1">
+
+                        <p id="countFollows" class="font-bold">{{ $user->followers()->count() }}</p><span
+                            class="font-normal">Seguidores</span>
+
+                    </div>
+
+                    <p class="font-bold">{{ $user->followings()->count() }} <span class="font-normal">Siguiendo</span></p>
+                    <p class="font-bold">{{ $user->posts()->count() }} <span class="font-normal">Post</span></p>
                 </div>
+
+                @if (auth()->user()->id !== $user->id)
+                    @if ($user->followers->contains(auth()->user()->id))
+                        <x-button style=2 value="Dejar de seguir" id="unfollow" />
+                    @else
+                        <x-button value="Seguir" id="follow" />
+                    @endif
+                @endif
+
             </div>
         </div>
     </div>
@@ -59,3 +74,8 @@
 
     </section>
 @endsection
+
+
+@push('scripts')
+    @vite('resources/js/follow.js')
+@endpush
