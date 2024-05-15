@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "alirezasedghi/laravel-image-faker": "^1.0",
+        "elegantweb/sanitizer": "^2.2",
         "intervention/image-laravel": "^1.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9"

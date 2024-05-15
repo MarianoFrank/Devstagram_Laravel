@@ -39,13 +39,19 @@
                     <p class="font-bold">{{ $user->posts()->count() }} <span class="font-normal">Post</span></p>
                 </div>
 
-                @if (auth()->user()->id !== $user->id)
-                    @if ($user->followers->contains(auth()->user()->id))
-                        <x-button style=2 value="Dejar de seguir" id="unfollow" />
-                    @else
+                @auth
+                    @if (auth()->user()->id !== $user->id)
+                        @if ($user->followers->contains(auth()->user()->id))
+                            <x-button style=2 value="Dejar de seguir" id="unfollow" />
+                        @else
                         <x-button value="Seguir" id="follow" />
+                        @endif
                     @endif
-                @endif
+                @endauth
+
+                @guest
+                <x-button value="Seguir" id="followGuest" />
+                @endguest
 
             </div>
         </div>

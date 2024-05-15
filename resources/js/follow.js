@@ -1,9 +1,16 @@
 import axios from "axios";
 import toastr from "toastr";
+
+import "toastr/build/toastr.css";
 window.addEventListener("DOMContentLoaded", function () {
     let url = window.location.href;
     let partesUrl = url.split("/");
     let userId = partesUrl[partesUrl.length - 1];
+
+    const buttonGuest = document.querySelector("#followGuest");
+    buttonGuest.addEventListener("click", () => {
+        toastr.info("Inicia sesion para seguir");
+    });
 
     const urlFollow = `/${userId}/follow`;
     const urlUnfollow = `/${userId}/unfollow`;

@@ -27,6 +27,7 @@ Route::post('/logout', [LogoutController::class, "store"])->name("logout");
 Route::get('/register', [RegisterController::class, "index"])->name("register");
 Route::post('/register', [RegisterController::class, "store"]);
 
+Route::get("/find", [SearchController::class, "index"])->name("find.index");
 
 //Rutas protegidas
 Route::middleware("auth")->group(function () {
@@ -65,4 +66,3 @@ Route::middleware("auth")->group(function () {
 Route::get("/{user}", [PostController::class, "index"])->name("posts.index");
 Route::get("/{user}/posts/{post}", [PostController::class, "show"])->name("posts.show");
 
-Route::get("/find", [SearchController::class, "index"])->name("find.index");

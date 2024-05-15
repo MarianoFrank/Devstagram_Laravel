@@ -17,8 +17,8 @@
 
 
         <div>
-            <form action="{{ route('find.index') }}" method="GET">
-                <input placeholder="Busca un usuario..." type="text" name="user">
+            <form action="{{ route('find.index') }}" method="GET" class="border-b">
+                <input placeholder="Busca un usuario..." type="text" name="user" class=" border-none p-2 outline-none">
                 <button type="submit">Buscar</button>
             </form>
         </div>
