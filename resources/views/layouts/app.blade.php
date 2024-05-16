@@ -18,6 +18,8 @@
 
     @vite('resources/css/app.css')
 
+    @livewireStyles
+
     <title>DevStagram @yield('titulo')</title>
 </head>
 
@@ -49,6 +51,8 @@
 
     @vite('resources/js/app.js')
     
+    @livewireScripts
+
     @stack("scripts")
 </body>
 

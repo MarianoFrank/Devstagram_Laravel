@@ -51,13 +51,6 @@ Route::middleware("auth")->group(function () {
     //comments 
     Route::post("/{user}/posts/{post}", [CommentController::class, "store"])->name("comments.store");
 
-    //likes
-    //setea el like del usuario autenticado  
-    Route::post("/posts/{post}/likes", [LikeController::class, "store"])->name("posts.likes.store");
-    //elimina del like del usuario autenticado
-    Route::delete("/posts/{post}/likes", [LikeController::class, "destroy"])->name("posts.likes.destroy");
-
-
     Route::post("/{user}/follow", [FollowerController::class, "store"])->name("user.follow");
     Route::delete("/{user}/unfollow", [FollowerController::class, "destroy"])->name("user.unfollow");
 });

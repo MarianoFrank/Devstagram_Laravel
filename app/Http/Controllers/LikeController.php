@@ -17,13 +17,13 @@ class LikeController extends Controller
             "user_id" => auth()->user()->id,
         ]);
 
-        return response()->json(["msg" => "Like added"]);
+        return redirect()->back();
     }
 
     public function destroy(Post $post)
     {
         $like = Like::where(['post_id' => $post->id, "user_id" => auth()->user()->id]);
         $like->delete();
-        return response()->json(["msg" => "Like deleted"]);
+        return redirect()->back();
     }
 }

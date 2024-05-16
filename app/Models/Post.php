@@ -32,4 +32,9 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    //return true if user authenticated liked this post
+    public function checkLikeAuthUser(){
+        return $this->likes->contains('user_id', auth()->user()->id);
+    }
 }

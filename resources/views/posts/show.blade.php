@@ -22,33 +22,10 @@
                 <div class="swiper-button-next"></div>
             </div>
 
-            <div class="flex gap-1 items-center">
-                @auth
-                    <div class="middle-wrapper">
-                        <div class="like-wrapper">
-                            <a class="like-button @if ($post->likes->contains('user_id', auth()->user()->id)) liked @endif">
-                                <span class="like-icon">
-                                    <div class="heart-animation-1"></div>
-                                    <div class="heart-animation-2"></div>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                @endauth
-                @guest
-                    <div class="middle-wrapper">
-                        <div class="like-wrapper">
-                            <a class="like-button" data-guest="true">
-                                <span class="like-icon">
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                @endguest
 
-                <p class="py-3" id="likeAccount">{{ $post->likes_count }}</p>
-            </div>
 
+            <livewire:like-post :post="$post"/>
+           
 
             <div class="flex py-2 gap-2">
                 <a class="font-bold"
@@ -118,7 +95,8 @@
             @endauth
 
             @guest
-                <p class="mt-3"> <a class="text-blue-500" href="{{ route('login') }}">Inicia sesion </a>para comentar, o <a class="text-blue-500" href="{{route("register")}}">registrate</a>.</p>
+                <p class="mt-3"> <a class="text-blue-500" href="{{ route('login') }}">Inicia sesion </a>para comentar, o <a
+                        class="text-blue-500" href="{{ route('register') }}">registrate</a>.</p>
             @endguest
         </div>
     </div>
